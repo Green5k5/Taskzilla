@@ -275,5 +275,18 @@
         background-color: #242424;
       }
     </style>
+    <!-- Подключаем виджет Netlify Identity -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "index.html"; // Куда перенаправлять после входа
+          });
+        }
+      });
+    }
+    </script>
   </body>
 </html>
