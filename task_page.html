@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskzilla</title>
+    <link href="assets/img/logo.png" rel="icon" />
+    <style>
+      @import url(https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap);
+    </style>
+  </head>
+  <body>
+    <div>
+      <header class="sticky top-0 z-50 md:top-2">
+        <nav
+          class="px-4 lg:px-6 py-2.5 bg-neutral-950 md:bg-transparent md:backdrop-blur-lg lg:mx-10 p rounded-lg md:rounded-full m-4"
+        >
+          <div
+            class="flex flex-wrap justify-between items-center mx-auto max-w-screen-4xl"
+          >
+            <a href="#" class="flex items-center">
+              <img src="assets/img/logo.png" class="mr-3 h-6 sm:h-9" />
+              <span
+                class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+                >Taskzilla</span
+              >
+            </a>
+            <div class="flex items-center lg:order-2">
+              <input
+                href="#"
+                placeholder="Поиск..."
+                class="dark:text-white bg-neutral-800 focus:ring-4 font-medium rounded-lg text-sm font-medium px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:border-neutral-700 dark:placeholder-neutral-400 focus:outline-none dark:focus:ring-[#373737]"
+              />
+              
+    
+                
+              <!-- Кнопка пользователя -->
+              <button 
+                id="user-menu-button"
+                class="flex items-center space-x-1 focus:outline-none"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <div class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center cursor-pointer">
+                  <img
+                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3MzkyNDZ8MHwxfHNlYXJchaHwxfHxhdmF0YXJ8ZW58MHx8fHwxNzQ2NzkzMTA2fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080"
+                    alt="User avatar"
+                    class="w-full h-full rounded-full object-cover"
+                  />
+                </div>
+                <div class="flex items-center text-neutral-300 cursor-pointer hover:text-white transition-colors hidden md:inline-flex">
+                  <span>Юзер</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
+              </button>
+            
+              <!-- Выпадающее меню -->
+              <div 
+                  id="user-dropdown"
+                  class="absolute right-6 z-50 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-neutral-900 dark:divide-gray-600"
+                  style="top: calc(100% + -5px);"
+                >
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                    <li>
+                      <a href="#" class="block px-4 py-2   dark:hover:text-green-400">Настройки</a> 
+                    </li>
+                    <li>
+                      <a href="#" class="block px-4 py-2 dark:hover:text-green-400">Награды</a>
+                    </li>
+                  </ul>
+                  <div class="py-1">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 text-white dark:hover:text-red-500">Выйти из аккаунта</a>
+                  </div>
+                </div>
+            </div>
+            
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const userMenuButton = document.getElementById('user-menu-button');
+                const userDropdown = document.getElementById('user-dropdown');
+                
+                userMenuButton.addEventListener('click', function(e) {
+                  e.stopPropagation();
+                  const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                  this.setAttribute('aria-expanded', !isExpanded);
+                  userDropdown.classList.toggle('hidden');
+                });
+                
+                document.addEventListener('click', function() {
+                  userMenuButton.setAttribute('aria-expanded', 'false');
+                  userDropdown.classList.add('hidden');
+                });
+                
+                userDropdown.addEventListener('click', function(e) {
+                  e.stopPropagation();
+                });
+              });
+            </script>
+
+
+              <button
+                data-collapse-toggle="mobile-menu-2"
+                type="button"
+                class="inline-flex items-center p-2 ml-1 text-sm rounded-lg lg:hidden focus:outline-none focus:ring-2 focus:ring-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:ring-neutral-600"
+                aria-controls="mobile-menu-2"
+                aria-expanded="false"
+              >
+                <span class="sr-only">Open main menu</span>
+                <svg
+                  class="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <svg
+                  class="hidden w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+              <div
+              class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+              id="mobile-menu-2"
+            >
+              <ul
+                class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+              >
+                <li>
+                  <a
+                    
+                    class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white font-bold"
+                    aria-current="page"
+                    >Проекты</a
+                  >
+                </li>
+                <!-- <li>
+                  <a
+                    href="#"
+                    class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >Планирование</a
+                  >
+                </li> -->
+                <li>
+                  <a
+                    href="calendar.html"
+                    id="calendar-link"
+                    class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >Календарь</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="achievements.html"
+                    id="achievements-link"
+                    class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >Награды</a
+                  >
+                </li>
+                
+              </ul>
+            </div>
+            </div>
+
+            
+
+        </nav>
+      </header>
+
+      <div
+        class="flex items-center justify-between mb-6 mx-0 md:mx-14 px-10 md:px-0 text-white bg-neutral-950 md:bg-transparent py-2 md:py-0"
+      >
+        <div class="flex items-center space-x-2 text-gray-400">
+          <button
+            onclick="window.location.href='index.html'"
+            class="flex items-center space-x-1 px-3 py-3 bg-neutral-900 hover:bg-gray-950 text-white rounded-md transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+              />
+            </svg>
+          </button>
+
+          <h1 class="text-white text-3xl font-bold pl-2">Название проекта</h1>
+          <button
+            class="flex items-center space-x-1 px-1.5 py-1.5 bg-neutral-900 hover:bg-gray-950 text-white rounded-md transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+              ></path>
+            </svg>
+          </button>
+
+
+            <!-- Пример кнопки календаря в task_page.html -->
+          <button onclick="navigateToCalendar()"
+            class="flex items-center space-x-1 px-1.5 py-1.5 bg-neutral-900 hover:bg-gray-950 text-white rounded-md transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </button>
+          
+          <!-- Кнопка для открытия модального окна -->
+    <button id="addTaskButton" class="inline-flex items-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill mr-0 md:mr-2" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+        </svg>
+        <span class="hidden md:block pl-1">Добавить задачу</span>
+    </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mx-14 text-white">
+        <!-- Модальное окно -->
+<div id="taskModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-neutral-950 rounded-lg p-6 w-full max-w-md mx-4">
+        <h3 class="text-xl font-bold mb-4">Добавить новую задачу</h3>
+        
+        <form id="taskForm">
+            <div class="mb-4">
+                <label for="taskTitle" class="block mb-2 text-sm font-medium">Название задачи</label>
+                <input type="text" id="taskTitle" class="bg-[#404040] border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Введите название">
+            </div>
+            
+            <div class="mb-4">
+                <label for="taskDescription" class="block mb-2 text-sm font-medium">Описание</label>
+                <input type="text" id="taskDescription" class="bg-[#404040] border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Введите описание">
+            </div>
+            
+            <div class="mb-4">
+                <label for="taskStartDate" class="block mb-2 text-sm font-medium">Дата начала</label>
+                <input type="date" id="taskStartDate" class="bg-[#404040] border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="taskEndDate" class="block mb-2 text-sm font-medium">Дата окончания</label>
+                <input type="date" id="taskEndDate" class="bg-[#404040] border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="taskEndTime" class="block mb-2 text-sm font-medium">Время окончания</label>
+                <input type="time" id="taskEndTime" class="bg-[#404040] border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button type="button" id="cancelButton" class="text-white hover:text-red-500 px-4 py-2 rounded">Отмена</button>
+                <button type="submit" class="text-white hover:text-green-500 px-4 py-2 rounded">Добавить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-0 max-w-2xl mx-0">
+    <div id="tasksContainer" class="task-container bg-gradient-to-r from-neutral-800 to-neutral-900 rounded-xl overflow-hidden p-6 min-h-80">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-2">
+                <div class="h-2 w-2 bg-gray-400 rounded-full"></div>
+                <h2 class="font-semibold text-lg">Нужно выполнить</h2>
+            </div>
+            <div class="relative">
+                <button id="headerMenuButton" class="text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                    </svg>
+                </button>
+                <div id="headerDropdownMenu" class="absolute right-0 mt-0 w-48 bg-neutral-950 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                    <div class="py-1">
+                        <a href="#" id="deleteAllTasks" class="block px-6 py-2 text-sm text-white rounded-lg hover:text-red-500 ">Удалить все задачи</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="emptyState" class="text-center text-gray-400 py-8">
+            Нет добавленных задач. Нажмите "Добавить задачу" чтобы создать первую.
+        </div>
+        
+        <!-- Здесь будут добавляться задачи -->
+    </div>
+</div>
+
+<!-- Контейнер для В процессе  -->
+<div id="inProgressTasksContainer" class="mt-0 max-w-2xl mx-0">
+    <div class="task-container bg-gradient-to-r from-neutral-900 to-neutral-950 rounded-xl overflow-hidden p-6 min-h-80">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-2">
+                <div class="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
+                <h2 class="font-semibold text-lg">В процессе</h2>
+            </div>
+            <div class="relative">
+                <button id="inProgressMenuButton" class="text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                    </svg>
+                </button>
+                <div id="inProgressDropdownMenu" class="absolute right-0 mt-0 w-48 bg-neutral-950 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                    <div class="py-1">
+                        <a href="#" id="deleteInProgressTasks" class="block px-6 py-2 text-sm text-white rounded-lg hover:text-red-500 ">Удалить все задачи</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Контейнер для завершенных задач -->
+<div id="completedTasksContainer" class="mt-0 max-w-2xl mx-0">
+    <div class="task-container bg-[#2a2a2a] rounded-xl overflow-hidden p-6 min-h-80">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-2">
+                <div class="h-2 w-2 bg-green-400 rounded-full"></div>
+                <h2 class="font-semibold text-lg">Готово!</h2>
+            </div>
+            <div class="relative">
+                <button id="completedMenuButton" class="text-gray-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                    </svg>
+                </button>
+                <div id="completedDropdownMenu" class="absolute right-0 mt-0 w-48 bg-neutral-950 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                    <div class="py-1">
+                        <a href="#" id="deleteCompletedTasks" class="block px-6 py-2 text-sm text-white rounded-lg hover:text-red-500">Удалить все задачи</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Получение projectId из URL
+            function getProjectIdFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('projectId');
+            }
+
+            const projectId = getProjectIdFromURL();
+            if (!projectId) {
+                alert('Проект не найден');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Загружаем проект, чтобы получить название
+            const projects = JSON.parse(localStorage.getItem('projects')) || [];
+            const project = projects.find(p => p.id === projectId);
+            if (!project) {
+                alert('Проект не найден');
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Установка названия проекта в заголовке
+            const projectTitleElement = document.querySelector('h1.text-white.text-3xl.font-bold');
+            if (projectTitleElement) {
+                projectTitleElement.textContent = project.name;
+            }
+
+            const modal = document.getElementById('taskModal');
+            const addButton = document.getElementById('addTaskButton');
+            const cancelButton = document.getElementById('cancelButton');
+            const taskForm = document.getElementById('taskForm');
+            const tasksContainer = document.getElementById('tasksContainer');
+            const emptyState = document.getElementById('emptyState');
+            const inProgressTasksContainer = document.getElementById('inProgressTasksContainer');
+            const completedTasksContainer = document.getElementById('completedTasksContainer');
+            
+            // Загружаем задачи из localStorage при загрузке страницы
+            loadTasks();
+            
+            function openModal() {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                
+                // Установка текущей даты по умолчанию
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('taskStartDate').value = today;
+                document.getElementById('taskEndDate').value = today;
+            }
+            
+            function closeModal() {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+            
+            if (addButton) addButton.addEventListener('click', openModal);
+            cancelButton.addEventListener('click', closeModal);
+            
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            function saveTasks() {
+            const tasks = [];
+            document.querySelectorAll('#tasksContainer > div:not(#emptyState):not(.flex.items-center.justify-between)').forEach(taskElement => {
+                tasks.push({
+                    html: taskElement.outerHTML,
+                    id: taskElement.dataset.taskId,
+                    title: taskElement.querySelector('h3.font-semibold')?.textContent,
+                    description: taskElement.querySelector('p.text-gray-400')?.textContent,
+                    startDate: taskElement.querySelector('div.flex.items-center.space-x-1.text-gray-400:nth-child(1) span').textContent.replace('Начало:', '').trim(),
+                    endDate: taskElement.querySelector('div.flex.items-center.space-x-1.text-gray-400:nth-child(2) span').textContent.replace('Конец:', '').trim(),
+                    projectId: projectId,
+                    projectName: project.name
+                });
+            });
+            
+            const inProgressTasks = [];
+            document.querySelectorAll('#inProgressTasksContainer > .task-container > div:not(.flex.items-center.justify-between)').forEach(taskElement => {
+                inProgressTasks.push({
+                    html: taskElement.outerHTML,
+                    id: taskElement.dataset.taskId,
+                    title: taskElement.querySelector('h3.font-semibold')?.textContent,
+                    description: taskElement.querySelector('p.text-gray-400')?.textContent,
+                    startDate: taskElement.querySelector('div.flex.items-center.space-x-1.text-gray-400:nth-child(1) span').textContent.replace('Начало:', '').trim(),
+                    endDate: taskElement.querySelector('div.flex.items-center.space-x-1.text-gray-400:nth-child(2) span').textContent.replace('Конец:', '').trim(),
+                    projectId: projectId,
+                    projectName: project.name
+                });
+            });
+            
+            const completedTasks = [];
+            document.querySelectorAll('#completedTasksContainer > .task-container > div:not(.flex.items-center.justify-between)').forEach(taskElement => {
+                completedTasks.push({
+                    html: taskElement.outerHTML,
+                    id: taskElement.dataset.taskId,
+                    title: taskElement.querySelector('h3.font-semibold')?.textContent,
+                    description: taskElement.querySelector('p.text-gray-400')?.textContent,
+                    startDate: taskElement.querySelector('div.flex.items-center.space-x-1.text-gray-400:nth-child(1) span').textContent.replace('Начало:', '').trim(),
+                    endDate: taskElement.querySelector('div.flex.items-center.space-x-1.text-gray-400:nth-child(2) span').textContent.replace('Конец:', '').trim(),
+                    projectId: projectId,
+                    projectName: project.name
+                });
+            });
+            
+            // Сохраняем с привязкой к projectId
+            localStorage.setItem(`tasks_${projectId}`, JSON.stringify(tasks));
+            localStorage.setItem(`inProgressTasks_${projectId}`, JSON.stringify(inProgressTasks));
+            localStorage.setItem(`completedTasks_${projectId}`, JSON.stringify(completedTasks));
+            
+            // Сохраняем задачи в общий список для календаря
+            const allTasks = JSON.parse(localStorage.getItem('allTasks')) || {};
+            allTasks[projectId] = [...tasks, ...inProgressTasks, ...completedTasks];
+            localStorage.setItem('allTasks', JSON.stringify(allTasks));
+            
+                
+                const hasTasks = tasks.length > 0 || document.querySelector('#tasksContainer > div:not(#emptyState):not(.flex.items-center.justify-between)');
+                if (hasTasks) {
+                    emptyState.classList.add('hidden');
+                } else {
+                    emptyState.classList.remove('hidden');
+                }
+                
+                // Всегда показываем контейнеры, даже если задач нет
+                inProgressTasksContainer.classList.remove('hidden');
+                completedTasksContainer.classList.remove('hidden');
+            }
+            
+            function loadTasks() {
+                // Загружаем задачи для текущего projectId
+                const savedTasks = localStorage.getItem(`tasks_${projectId}`);
+                if (savedTasks) {
+                    const tasks = JSON.parse(savedTasks);
+                    if (tasks.length > 0) {
+                        emptyState.classList.add('hidden');
+                        tasks.forEach(task => {
+                            tasksContainer.insertAdjacentHTML('beforeend', task.html);
+                        });
+                    }
+                }
+                
+                const savedInProgressTasks = localStorage.getItem(`inProgressTasks_${projectId}`);
+                if (savedInProgressTasks) {
+                    const inProgressTasks = JSON.parse(savedInProgressTasks);
+                    if (inProgressTasks.length > 0) {
+                        inProgressTasks.forEach(task => {
+                            const taskElement = document.createElement('div');
+                            taskElement.innerHTML = task.html;
+                            
+                            const taskContent = taskElement.querySelector('div.bg-neutral-950');
+                            if (taskContent) {
+                                const dotsButton = `
+                                    <button class="text-gray-400 hover:text-white transition-colors relative">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                                        </svg>
+                                        <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-gradient-to-l from-gray-800 to-gray-600 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                                            <div class="py-1">
+                                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 rounded-lg hover:bg-green-600 hover:text-white">Готово!</a>
+                                                <a href="#" class="block px-4 py-2 text-sm text-red-400 rounded-lg hover:text-red-500">Удалить задачу</a>
+                                            </div>
+                                        </div>
+                                    </button>
+                                `;
+                                
+                                const headerDiv = taskContent.querySelector('.flex.justify-between.items-start.mb-2');
+                                if (headerDiv) {
+                                    const existingButton = headerDiv.querySelector('button.text-gray-400');
+                                    if (!existingButton) {
+                                        headerDiv.insertAdjacentHTML('beforeend', dotsButton);
+                                    }
+                                }
+                            }
+                            
+                            inProgressTasksContainer.querySelector('.task-container').insertAdjacentElement('beforeend', taskElement.firstChild);
+                        });
+                    }
+                }
+                
+                const savedCompletedTasks = localStorage.getItem(`completedTasks_${projectId}`);
+                if (savedCompletedTasks) {
+                    const completedTasks = JSON.parse(savedCompletedTasks);
+                    if (completedTasks.length > 0) {
+                        completedTasks.forEach(task => {
+                            const taskElement = document.createElement('div');
+                            taskElement.innerHTML = task.html;
+                            
+                            const taskContent = taskElement.querySelector('div.bg-neutral-950');
+                            if (taskContent) {
+                                const dotsButton = `
+                                    <button class="text-gray-400 hover:text-white transition-colors relative">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                                        </svg>
+                                        <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-gradient-to-l from-gray-800 to-gray-600 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                                            <div class="py-1">
+                                                <a href="#" class="block px-4 py-2 text-sm text-red-400 rounded-lg hover:bg-red-600 hover:text-white">Удалить задачу</a>
+                                            </div>
+                                        </div>
+                                    </button>
+                                `;
+                                
+                                const headerDiv = taskContent.querySelector('.flex.justify-between.items-start.mb-2');
+                                if (headerDiv) {
+                                    const existingButton = headerDiv.querySelector('button.text-gray-400');
+                                    if (!existingButton) {
+                                        headerDiv.insertAdjacentHTML('beforeend', dotsButton);
+                                    }
+                                }
+                            }
+                            
+                            completedTasksContainer.querySelector('.task-container').insertAdjacentElement('beforeend', taskElement.firstChild);
+                        });
+                    }
+                }
+            }
+
+            function handleTaskContainerClick(container, isCompleted = false) {
+                container.addEventListener('click', function(e) {
+                    const dotsButton = e.target.closest('button.text-gray-400');
+                    if (dotsButton) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                            if (menu !== dotsButton.querySelector('.dropdown-menu')) {
+                                menu.classList.add('hidden');
+                            }
+                        });
+                        
+                        const dropdown = dotsButton.querySelector('.dropdown-menu');
+                        dropdown.classList.toggle('hidden');
+                        
+                        const oldLinks = dropdown.querySelectorAll('a');
+                        oldLinks.forEach(link => {
+                            link.replaceWith(link.cloneNode(true));
+                        });
+                        
+                        dropdown.querySelectorAll('a').forEach(link => {
+                            link.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                const taskElement = dotsButton.closest('.bg-neutral-950');
+                                
+                                if (this.textContent === 'Удалить задачу') {
+                                    taskElement.remove();
+                                    saveTasks();
+                                } else if (this.textContent === 'В процессе') {
+                                    const taskClone = taskElement.cloneNode(true);
+                                    
+                                    taskClone.classList.remove('bg-gradient-to-l', 'from-neutral-900', 'to-neutral-950');
+                                    taskClone.classList.add('bg-gradient-to-l', 'from-neutral-900', 'to-neutral-950');
+                                    
+                                    const oldButton = taskClone.querySelector('button.text-gray-400');
+                                    if (oldButton) {
+                                        oldButton.remove();
+                                    }
+                                    
+                                    const headerDiv = taskClone.querySelector('.flex.justify-between.items-start.mb-2');
+                                    if (headerDiv) {
+                                        const newDotsButton = `
+                                            <button class="text-gray-400 hover:text-white transition-colors relative">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                                                </svg>
+                                                <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-neutral-950 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                                                    <div class="py-1">
+                                                        <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg hover:text-green-500">Готово!</a>
+                                                        <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg hover:text-red-500">Удалить задачу</a>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        `;
+                                        headerDiv.insertAdjacentHTML('beforeend', newDotsButton);
+                                    }
+                                    
+                                    inProgressTasksContainer.querySelector('.task-container').insertAdjacentElement('beforeend', taskClone);
+                                    
+                                    taskElement.remove();
+                                    
+                                    saveTasks();
+                                } else if (this.textContent === 'Готово!' && !isCompleted) {
+                                    const taskClone = taskElement.cloneNode(true);
+                                    
+                                    taskClone.classList.remove('bg-gradient-to-l', 'from-gray-800', 'to-gray-600');
+                                    taskClone.classList.add('bg-primary-1000');
+                                    
+                                    const oldButton = taskClone.querySelector('button.text-gray-400');  
+                                    if (oldButton) {
+                                        oldButton.remove();
+                                    }
+                                    
+                                    const headerDiv = taskClone.querySelector('.flex.justify-between.items-start.mb-2');
+                                    if (headerDiv) {
+                                        const newDotsButton = `
+                                            <button class="text-gray-400 hover:text-white transition-colors relative">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                                                </svg>
+                                                <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-neutral-950 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                                                    <div class="py-1">
+                                                        <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg hover:text-red-500">Удалить задачу</a>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        `;
+                                        headerDiv.insertAdjacentHTML('beforeend', newDotsButton);
+                                    }
+                                    
+                                    completedTasksContainer.querySelector('.task-container').insertAdjacentElement('beforeend', taskClone);
+                                    
+                                    taskElement.remove();
+                                    
+                                    saveTasks();
+                                }
+                                
+                                dropdown.classList.add('hidden');
+                            });
+                        });
+                    } else {
+                        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                            menu.classList.add('hidden');
+                        });
+                    }
+                });
+            }
+
+            handleTaskContainerClick(tasksContainer);
+            handleTaskContainerClick(inProgressTasksContainer.querySelector('.task-container'));
+            handleTaskContainerClick(completedTasksContainer.querySelector('.task-container'), true);
+
+            const inProgressMenuButton = document.getElementById('inProgressMenuButton');
+            const inProgressDropdownMenu = document.getElementById('inProgressDropdownMenu');
+            const deleteInProgressTasks = document.getElementById('deleteInProgressTasks');
+            
+            if (inProgressMenuButton) {
+                inProgressMenuButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    inProgressDropdownMenu.classList.toggle('hidden');
+                });
+            }
+            
+            if (deleteInProgressTasks) {
+                deleteInProgressTasks.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Удаляем все задачи из конта "В процессе"
+                    const taskElements = inProgressTasksContainer.querySelectorAll('.task-container > div:not(.flex.items-center.justify-between)');
+                    
+                    taskElements.forEach(task => task.remove());
+                    
+                    saveTasks();
+                    
+                    inProgressDropdownMenu.classList.add('hidden');
+                });
+            }
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown-menu') && !e.target.closest('button[class*="text-gray-400"]')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.add('hidden');
+                    });
+                }
+            });
+
+            const completedMenuButton = document.getElementById('completedMenuButton');
+            const completedDropdownMenu = document.getElementById('completedDropdownMenu');
+            const deleteCompletedTasks = document.getElementById('deleteCompletedTasks');
+            
+            if (completedMenuButton) {
+                completedMenuButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    completedDropdownMenu.classList.toggle('hidden');
+                });
+            }
+            
+            if (deleteCompletedTasks) {
+                deleteCompletedTasks.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Удаляем все задачи из конта "Готово"
+                    const taskElements = completedTasksContainer.querySelectorAll('.task-container > div:not(.flex.items-center.justify-between)');
+                    
+                    taskElements.forEach(task => task.remove());
+                    
+                    saveTasks();
+                    
+                    completedDropdownMenu.classList.add('hidden');
+                });
+            }
+
+            // Закрываем меню при клике вне его
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown-menu') && !e.target.closest('button[class*="text-gray-400"]')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.add('hidden');
+                    });
+                }
+            });
+            
+            taskForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const taskTitle = document.getElementById('taskTitle').value;
+                const taskDescription = document.getElementById('taskDescription').value;
+                const taskStartDate = document.getElementById('taskStartDate').value;
+                const taskEndDate = document.getElementById('taskEndDate').value;
+                const taskEndTime = document.getElementById('taskEndTime').value;
+                
+                // Генерируем уникальный ID для задачи
+                const taskId = 'task-' + Date.now();
+                
+                // Форматируем дату начала (без времени)
+                const startDateObj = new Date(taskStartDate);
+                const startDateOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+                const formattedStartDate = startDateObj.toLocaleDateString('ru-RU', startDateOptions);
+                
+                // Форматируем дату окончания (с временем)
+                const endDateObj = new Date(`${taskEndDate}T${taskEndTime}`);
+                const endDateOptions = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+                const formattedEndDateTime = endDateObj.toLocaleDateString('ru-RU', endDateOptions);
+                
+                // Создаем HTML для новой задачи
+                const taskHTML = `
+                <div class="bg-neutral-950 rounded-xl overflow-hidden mb-4 hover:shadow-lg transition-shadow overflow-auto min-h-[180px]" 
+                     data-task-id="${taskId}" 
+                     data-start-date="${taskStartDate}" 
+                     data-end-date="${taskEndDate}">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex space-x-3 items-center">
+                                <div class="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center">
+                                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3MzkyNDZ8MHwxfHNlYXJjaHwxfHxjYWtlfGVufDB8fHx8MTc0Njc5MzQ3NXww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Task icon" class="h-8 w-8 object-cover rounded-lg">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">${taskTitle}</h3>
+                                    ${taskDescription ? `<p class="min-h-[50px] text-sm text-gray-400">${taskDescription}</p>` : ''}
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-white transition-colors relative">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                                </svg>
+                                <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-neutral-950 rounded-lg shadow-lg z-50 hidden border border-gray-700">
+                                    <div class="py-1">
+                                        <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg hover:text-green-500">В процессе</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg hover:text-green-500">Готово!</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg hover:text-red-500">Удалить задачу</a>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4">
+                        <div class="flex justify-between items-center text-sm">
+                            <div class="flex items-center space-x-1 text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <span>Начало:${formattedStartDate}</span>
+                            </div>
+                            <div class="flex items-center space-x-1 text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" ></path>
+                                </svg>
+                                <span>Конец:${formattedEndDateTime}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+                
+                if (!emptyState.classList.contains('hidden')) {
+                    emptyState.classList.add('hidden');
+                }
+                
+                const emptyStateElement = document.getElementById('emptyState');
+                if (emptyStateElement) {
+                    emptyStateElement.insertAdjacentHTML('beforebegin', taskHTML);
+                } else {
+                    tasksContainer.insertAdjacentHTML('beforeend', taskHTML);
+                }
+                
+                saveTasks();
+                
+                closeModal();
+                
+                taskForm.reset();
+            });
+        });
+    </script>
+
+    <script>
+    function navigateToCalendar() {
+        // Получаем ID проекта из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('projectId');
+        
+        // Получаем задачи проекта
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || {};
+        const projectTasks = tasks[projectId] || [];
+        
+        if (projectTasks.length > 0) {
+            // Перенаправляем на календарь с фокусом на первой задаче
+            window.location.href = `calendar.html?focusTask=${projectTasks[0].id}`;
+        } else {
+            // Просто перенаправляем на календарь
+            window.location.href = 'calendar.html';
+        }
+    }
+    </script>
+    
+     
+<script src="https://cdn.tailwindcss.com "></script>
+    <script>
+      tailwind.config = {
+        content: ["./src/**/*.{html,js}"],
+        theme: {
+          fontFamily: {
+            sans: [
+              "Manrope",
+              "ui-sans-serif",
+              "system-ui",
+              "sans-serif",
+              '"Apple Color Emoji"',
+              '"Segoe UI Emoji"',
+              '"Segoe UI Symbol"',
+              '"Noto Color Emoji"',
+            ],
+          },
+          extend: {
+            fontFamily: {
+              title: [
+                "Manrope",
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+                '"Noto Color Emoji"',
+              ],
+              body: [
+                "Manrope",
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+                '"Noto Color Emoji"',
+              ],
+            },
+            colors: {
+              neutral: {
+                50: "#f7f7f7",
+                100: "#eeeeee",
+                200: "#e0e0e0",
+                300: "#cacaca",
+                400: "#b1b1b1",
+                500: "#999999",
+                600: "#7f7f7f",
+                700: "#676767",
+                800: "#414141",
+                900: "#373737",
+                950: "#242424",
+              },
+              primary: {
+                50: "#f0fdf4",
+                100: "#dbfce7",
+                200: "#b9f8cf",
+                300: "#7bf1a8",
+                400: "#05df72",
+                500: "#00c950",
+                600: "#00a63e",
+                700: "#008235",
+                800: "#016630",
+                900: "#0d542b",
+                950: "#032e15",
+                1000: "#404040",
+                DEFAULT: "#611bf8",
+              },
+            },
+          },
+          fontSize: {
+            xs: ["12px", { lineHeight: "19.200000000000003px" }],
+            sm: ["14px", { lineHeight: "21px" }],
+            base: ["16px", { lineHeight: "25.6px" }],
+            lg: ["18px", { lineHeight: "27px" }],
+            xl: ["20px", { lineHeight: "28px" }],
+            "2xl": ["24px", { lineHeight: "31.200000000000003px" }],
+            "3xl": ["30px", { lineHeight: "36px" }],
+            "4xl": ["36px", { lineHeight: "41.4px" }],
+            "5xl": ["48px", { lineHeight: "52.800000000000004px" }],
+            "6xl": ["60px", { lineHeight: "66px" }],
+            "7xl": ["72px", { lineHeight: "75.60000000000001px" }],
+            "8xl": ["96px", { lineHeight: "100.80000000000001px" }],
+            "9xl": ["128px", { lineHeight: "134.4px" }],
+          },
+          borderRadius: {
+            none: "0px",
+            sm: "6px",
+            DEFAULT: "12px",
+            md: "18px",
+            lg: "24px",
+            xl: "36px",
+            "2xl": "48px",
+            "3xl": "72px",
+            full: "9999px",
+          },
+          spacing: {
+            0: "0px",
+            1: "4px",
+            2: "8px",
+            3: "12px",
+            4: "16px",
+            5: "20px",
+            6: "24px",
+            7: "28px",
+            8: "32px",
+            9: "36px",
+            10: "40px",
+            11: "44px",
+            12: "48px",
+            14: "56px",
+            16: "64px",
+            20: "80px",
+            24: "96px",
+            28: "112px",
+            32: "128px",
+            36: "144px",
+            40: "160px",
+            44: "176px",
+            48: "192px",
+            52: "208px",
+            56: "224px",
+            60: "240px",
+            64: "256px",
+            72: "288px",
+            80: "320px",
+            96: "384px",
+            px: "1px",
+            0.5: "2px",
+            1.5: "6px",
+            2.5: "10px",
+            3.5: "14px",
+          },
+        },
+        plugins: [],
+      };
+    </script>
+    <style>
+      body {
+        background-color: #242424;
+      }
+    </style>
+</div>
+</body>
+</html>

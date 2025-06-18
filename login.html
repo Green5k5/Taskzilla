@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskzilla</title>
+    <link href="assets/img/logo.png" rel="icon" />
+    <style>
+      @import url(https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap);
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen flex fle-col items-center justify-center">
+      <div class="py-6 px-4">
+        <div class="grid md:grid-cols-2 items-center gap-6 max-w-6xl w-full">
+          <div
+            class="rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900 p-6 max-w-md max-md:mx-auto"
+          >
+            <form class="space-y-6">
+              <div class="mb-12">
+                <h3 class="text-white text-4xl font-semibold">Вход</h3>
+                <p class="text-neutral-400 text-md mt-6 leading-relaxed">
+                  Войдите в свою учетную запись, а мы поможем вам с порядком в
+                  делах. :)
+                </p>
+              </div>
+
+              <div>
+                <div class="relative flex items-center">
+                  <input
+                    name="username"
+                    type="text"
+                    required
+                    class="w-full font-bold text-sm text-neutral-400 border border-neutral-600 pl-4 pr-10 py-3 rounded-md outline-green-600 bg-neutral-800"
+                    placeholder="Логин..."
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#bbb"
+                    stroke="#bbb"
+                    class="w-[18px] h-[18px] absolute right-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      cx="10"
+                      cy="7"
+                      r="6"
+                      data-original="#000000"
+                    ></circle>
+                    <path
+                      d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                      data-original="#000000"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div class="relative flex items-center">
+                  <input
+                    name="password"
+                    type="password"
+                    required
+                    class="w-full font-bold text-sm text-neutral-400 border border-neutral-600 pl-4 pr-10 py-3 rounded-md outline-green-600 bg-neutral-800"
+                    placeholder="Пароль..."
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#bbb"
+                    stroke="#bbb"
+                    class="w-[18px] h-[18px] absolute right-4 cursor-pointer"
+                    viewBox="0 0 128 128"
+                  >
+                    <path
+                      d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
+                      data-original="#000000"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-between gap-4">
+                <label class="inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    value=""
+                    class="sr-only peer"
+                    checked
+                  />
+                  <div
+                    class="relative w-11 h-6 rounded-full peer peer-focus:ring-4 peer-focus:ring-green-800 bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600 dark:peer-checked:bg-green-600"
+                  ></div>
+                  <span
+                    class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >Запомнить меня</span
+                  >
+                </label>
+
+                <div class="text-sm">
+                  <a
+                    href="#"
+                    class="text-green-600 hover:underline font-semibold"
+                  >
+                    Забыли пароль?
+                  </a>
+                </div>
+              </div>
+
+              <div class="!mt-12">
+                <button
+                  type="button"
+                  class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none cursor-pointer"
+                >
+                  Вход
+                </button>
+                <p class="text-sm !mt-6 text-center text-neutral-500">
+                  Нет аккаунта?
+                  <a
+                    href="javascript:void(0);"
+                    class="text-green-600 hover:underline ml-1 whitespace-nowrap font-bold"
+                    >Зарегистрироваться</a
+                  >
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <div class="max-md:mt-8">
+            <img
+              src="assets/img/user img.png"
+              class="w-full max-md:w-4/5 mx-auto block object-cover"
+              alt="login img"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com "></script>
+    <script>
+      tailwind.config = {
+        content: ["./src/**/*.{html,js}"],
+        theme: {
+          fontFamily: {
+            sans: [
+              "Manrope",
+              "ui-sans-serif",
+              "system-ui",
+              "sans-serif",
+              '"Apple Color Emoji"',
+              '"Segoe UI Emoji"',
+              '"Segoe UI Symbol"',
+              '"Noto Color Emoji"',
+            ],
+          },
+          extend: {
+            fontFamily: {
+              title: [
+                "Manrope",
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+                '"Noto Color Emoji"',
+              ],
+              body: [
+                "Manrope",
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+                '"Noto Color Emoji"',
+              ],
+            },
+            colors: {
+              neutral: {
+                50: "#f7f7f7",
+                100: "#eeeeee",
+                200: "#e0e0e0",
+                300: "#cacaca",
+                400: "#b1b1b1",
+                500: "#999999",
+                600: "#7f7f7f",
+                700: "#676767",
+                800: "#414141",
+                900: "#373737",
+                950: "#242424",
+              },
+              primary: {
+                50: "#f0fdf4",
+                100: "#dbfce7",
+                200: "#b9f8cf",
+                300: "#7bf1a8",
+                400: "#05df72",
+                500: "#00c950",
+                600: "#00a63e",
+                700: "#008235",
+                800: "#016630",
+                900: "#0d542b",
+                950: "#032e15",
+                DEFAULT: "#611bf8",
+              },
+            },
+          },
+          fontSize: {
+            xs: ["12px", { lineHeight: "19.200000000000003px" }],
+            sm: ["14px", { lineHeight: "21px" }],
+            base: ["16px", { lineHeight: "25.6px" }],
+            lg: ["18px", { lineHeight: "27px" }],
+            xl: ["20px", { lineHeight: "28px" }],
+            "2xl": ["24px", { lineHeight: "31.200000000000003px" }],
+            "3xl": ["30px", { lineHeight: "36px" }],
+            "4xl": ["36px", { lineHeight: "41.4px" }],
+            "5xl": ["48px", { lineHeight: "52.800000000000004px" }],
+            "6xl": ["60px", { lineHeight: "66px" }],
+            "7xl": ["72px", { lineHeight: "75.60000000000001px" }],
+            "8xl": ["96px", { lineHeight: "100.80000000000001px" }],
+            "9xl": ["128px", { lineHeight: "134.4px" }],
+          },
+          borderRadius: {
+            none: "0px",
+            sm: "6px",
+            DEFAULT: "12px",
+            md: "18px",
+            lg: "24px",
+            xl: "36px",
+            "2xl": "48px",
+            "3xl": "72px",
+            full: "9999px",
+          },
+          spacing: {
+            0: "0px",
+            1: "4px",
+            2: "8px",
+            3: "12px",
+            4: "16px",
+            5: "20px",
+            6: "24px",
+            7: "28px",
+            8: "32px",
+            9: "36px",
+            10: "40px",
+            11: "44px",
+            12: "48px",
+            14: "56px",
+            16: "64px",
+            20: "80px",
+            24: "96px",
+            28: "112px",
+            32: "128px",
+            36: "144px",
+            40: "160px",
+            44: "176px",
+            48: "192px",
+            52: "208px",
+            56: "224px",
+            60: "240px",
+            64: "256px",
+            72: "288px",
+            80: "320px",
+            96: "384px",
+            px: "1px",
+            0.5: "2px",
+            1.5: "6px",
+            2.5: "10px",
+            3.5: "14px",
+          },
+        },
+        plugins: [],
+      };
+    </script>
+    <style>
+      body {
+        background-color: #242424;
+      }
+    </style>
+  </body>
+</html>

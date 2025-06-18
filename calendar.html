@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskzilla</title>
+    <link href="assets/img/logo.png" rel="icon" />
+    <style>
+      @import url(https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap);
+    </style>
+  </head>
+  <body>
+    <div>
+      <header class="sticky top-0 z-50 md:top-2">
+        <nav
+          class="px-4 lg:px-6 py-2.5 bg-neutral-950 md:bg-transparent md:backdrop-blur-lg lg:mx-10 p rounded-lg md:rounded-full m-4"
+        >
+          <div
+            class="flex flex-wrap justify-between items-center mx-auto max-w-screen-4xl"
+          >
+            <a href="#" class="flex items-center">
+              <img src="assets/img/logo.png" class="mr-3 h-6 sm:h-9" />
+              <span
+                class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+                >Taskzilla</span
+              >
+            </a>
+            <div class="flex items-center lg:order-2">
+              <input
+                href="#"
+                placeholder="Поиск..."
+                class="dark:text-white bg-neutral-800 focus:ring-4 font-medium rounded-lg text-sm font-medium px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:border-neutral-700 dark:placeholder-neutral-400 focus:outline-none dark:focus:ring-[#373737]"
+              />
+              <div class="flex items-center space-x-2 relative">
+
+              <!-- Кнопка пользователя -->
+              <button 
+                id="user-menu-button"
+                class="flex items-center space-x-1 focus:outline-none"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <div class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center cursor-pointer">
+                  <img
+                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3MzkyNDZ8MHwxfHNlYXJchaHwxfHxhdmF0YXJ8ZW58MHx8fHwxNzQ2NzkzMTA2fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080"
+                    alt="User avatar"
+                    class="w-full h-full rounded-full object-cover"
+                  />
+                </div>
+                <div class="flex items-center text-neutral-300 cursor-pointer hover:text-white transition-colors hidden md:inline-flex">
+                  <span>Юзер</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
+              </button>
+            
+              <!-- Выпадающее меню -->
+              <div 
+                  id="user-dropdown"
+                  class="absolute right-0 z-50 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-neutral-900 dark:divide-gray-600"
+                  style="top: calc(100% + 10px);"
+                >
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                    <li>
+                      <a href="#" class="block px-4 py-2   dark:hover:text-green-400">Настройки</a> 
+                    </li>
+                    <li>
+                      <a href="#" class="block px-4 py-2 dark:hover:text-green-400">Награды</a>
+                    </li>
+                  </ul>
+                  <div class="py-1">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 text-white dark:hover:text-red-500">Выйти из аккаунта</a>
+                  </div>
+                </div>
+            </div>
+            
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const userMenuButton = document.getElementById('user-menu-button');
+                const userDropdown = document.getElementById('user-dropdown');
+                
+                userMenuButton.addEventListener('click', function(e) {
+                  e.stopPropagation();
+                  const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                  this.setAttribute('aria-expanded', !isExpanded);
+                  userDropdown.classList.toggle('hidden');
+                });
+                
+                document.addEventListener('click', function() {
+                  userMenuButton.setAttribute('aria-expanded', 'false');
+                  userDropdown.classList.add('hidden');
+                });
+                
+                userDropdown.addEventListener('click', function(e) {
+                  e.stopPropagation();
+                });
+              });
+            </script>
+            
+              <button
+                data-collapse-toggle="mobile-menu-2"
+                type="button"
+                class="inline-flex items-center p-2 ml-1 text-sm rounded-lg lg:hidden focus:outline-none focus:ring-2 focus:ring-neutral-200 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:ring-neutral-600"
+                aria-controls="mobile-menu-2"
+                aria-expanded="false"
+              >
+                <span class="sr-only">Open main menu</span>
+                <svg
+                  class="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <svg
+                  class="hidden w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <div
+              class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+              id="mobile-menu-2"
+            >
+              <ul
+                class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+              >
+                <li>
+                  <a
+                    href="index.html"
+                    id="index-link"
+                    class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-neutral-950 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    aria-current="page"
+                    >Проекты</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="calendar.html"
+                    id="calendar-link"
+                    class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white font-bold"
+                    >Календарь</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="achievements.html"
+                    id="achievements-link"
+                    class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-neutral-950 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    >Награды</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <div
+        class="flex items-center justify-between mb-6 mx-0 md:mx-14 px-10 md:px-0 sticky top-24 text-white bg-neutral-950 md:bg-transparent backdrop-blur-sm py-2 md:py-0"
+      >
+        <div class="flex items-center space-x-2 text-gray-400">
+          <button
+            id="current-month-btn"
+            class="flex items-center space-x-1 px-3 py-1.5 bg-primary-600 text-white rounded-md transition-colors"
+          >
+            <span id="current-month-text">Сентябрь 2025</span>
+          </button>
+          <button
+            id="prev-month-btn"
+            class="flex items-center space-x-1 px-3 py-1.5 bg-neutral-900 hover:bg-gray-950 text-white rounded-md transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chevron-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+              />
+            </svg>
+          </button>
+          <button
+            id="next-month-btn"
+            class="flex items-center space-x-1 px-3 py-1.5 bg-neutral-900 hover:bg-gray-950 text-white rounded-md transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chevron-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.646 1.646a.5.5 0 0 0 .708 0l6 6a.5.5 0 0 0 0 .708l-6 6a.5.5 0 0 0-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 0 0-.708"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div
+            class="flex items-center gap-px p-1 rounded-md bg-gradient-to-r from-neutral-800 to-neutral-900"
+          >
+            <button
+              id="day-view-btn"
+              class="py-2.5 px-5 rounded-lg bg-green-600 text-sm text-gray-100 transition-colors duration-300 hover:bg-black hover:text-white font-bold"
+            >
+              День
+            </button>
+            <button
+              id="week-view-btn"
+              class="py-2.5 px-5 rounded-lg bg-transparent text-sm font-medium text-gray-100 transition-colors duration-300 hover:bg-black hover:text-white"
+            >
+              Неделя
+            </button>
+            <button
+              id="month-view-btn"
+              class="py-2.5 px-5 rounded-lg bg-transparent text-sm font-medium text-gray-100 transition-colors duration-300 hover:bg-black hover:text-white"
+            >
+              Месяц
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border border-neutral-700 mx-14 rounded-lg bg-gradient-to-r from-neutral-800 to-neutral-900">
+          <div class="grid grid-cols-7 divide-neutral-700 border-b border-neutral-700" id="weekdays-header">
+            <div class="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-neutral-700">
+              <span class="text-sm font-medium text-white">Пн</span>
+              <span class="text-sm font-medium text-green-600" id="mon-day">9</span>
+            </div>
+            <div class="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-neutral-700">
+              <span class="text-sm font-medium text-white">Вт</span>
+              <span class="text-sm font-medium text-green-600" id="tue-day">10</span>
+            </div>
+            <div class="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-neutral-700">
+              <span class="text-sm font-medium text-white">Ср</span>
+              <span class="text-sm font-medium text-green-600" id="wed-day">11</span>
+            </div>
+            <div class="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-neutral-700">
+              <span class="text-sm font-medium text-white">Чт</span>
+              <span class="text-sm font-medium text-green-600" id="thu-day">12</span>
+            </div>
+            <div class="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-neutral-700">
+              <span class="text-sm font-medium text-white">Пт</span>
+              <span class="text-sm font-medium text-green-600" id="fri-day">13</span>
+            </div>
+            <div class="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-neutral-700">
+              <span class="text-sm font-medium text-white">Сб</span>
+              <span class="text-sm font-medium text-green-600" id="sat-day">14</span>
+            </div>
+            <div class="p-3.5 flex flex-col sm:flex-row items-center justify-between">
+              <span class="text-sm font-medium text-white">Вс</span>
+              <span class="text-sm font-medium text-green-600" id="sun-day">15</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-7 divide-neutral-700" id="calendar-grid">
+            <!-- Календарь будет генерироваться динамически -->
+          </div>
+        </div>
+        <div class="w-full lg:hidden py-8 px-2.5">
+          <div class="bg-neutral-950 w-full rounded-xl">
+            <div class="p-3 w-full flex items-center justify-between group transition-all duration-300">
+              <div class="flex flex-col gap-2">
+                <span class="text-sm font-medium text-green-600">Meet with friends</span>
+                <div class="flex items-center gap-2.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 8.99998V13L15 16M3 5.12132L5.10714 3M20.998 5.12657L18.8909 3.00525M20 13C20 17.4183 16.4183 21 12 21C7.58172 21 4 17.4183 4 13C4 8.5817 7.58172 4.99998 12 4.99998C16.4183 4.99998 20 8.5817 20 13Z" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  <span class="text-xs font-medium text-gray-600">9AM</span>
+                </div>
+              </div>
+              <button class="py-1 px-2 rounded border border-gray-400 text-xs font-medium text-green-600 opacity-0 transition-all duration-500 group-hover:opacity-100">Edit</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        content: ["./src/**/*.{html,js}"],
+        theme: {
+          fontFamily: {
+            sans: [
+              "Manrope",
+              "ui-sans-serif",
+              "system-ui",
+              "sans-serif",
+              '"Apple Color Emoji"',
+              '"Segoe UI Emoji"',
+              '"Segoe UI Symbol"',
+              '"Noto Color Emoji"',
+            ],
+          },
+          extend: {
+            fontFamily: {
+              title: [
+                "Manrope",
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+                '"Noto Color Emoji"',
+              ],
+              body: [
+                "Manrope",
+                "ui-sans-serif",
+                "system-ui",
+                "sans-serif",
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+                '"Noto Color Emoji"',
+              ],
+            },
+            colors: {
+              neutral: {
+                50: "#f7f7f7",
+                100: "#eeeeee",
+                200: "#e0e0e0",
+                300: "#cacaca",
+                400: "#b1b1b1",
+                500: "#999999",
+                600: "#7f7f7f",
+                700: "#676767",
+                800: "#414141",
+                900: "#373737",
+                950: "#242424",
+              },
+              primary: {
+                50: "#f0fdf4",
+                100: "#dbfce7",
+                200: "#b9f8cf",
+                300: "#7bf1a8",
+                400: "#05df72",
+                500: "#00c950",
+                600: "#00a63e",
+                700: "#008235",
+                800: "#016630",
+                900: "#0d542b",
+                950: "#032e15",
+                DEFAULT: "#611bf8",
+              },
+            },
+          },
+          fontSize: {
+            xs: ["12px", { lineHeight: "19.200000000000003px" }],
+            sm: ["14px", { lineHeight: "21px" }],
+            base: ["16px", { lineHeight: "25.6px" }],
+            lg: ["18px", { lineHeight: "27px" }],
+            xl: ["20px", { lineHeight: "28px" }],
+            "2xl": ["24px", { lineHeight: "31.200000000000003px" }],
+            "3xl": ["30px", { lineHeight: "36px" }],
+            "4xl": ["36px", { lineHeight: "41.4px" }],
+            "5xl": ["48px", { lineHeight: "52.800000000000004px" }],
+            "6xl": ["60px", { lineHeight: "66px" }],
+            "7xl": ["72px", { lineHeight: "75.60000000000001px" }],
+            "8xl": ["96px", { lineHeight: "100.80000000000001px" }],
+            "9xl": ["128px", { lineHeight: "134.4px" }],
+          },
+          borderRadius: {
+            none: "0px",
+            sm: "6px",
+            DEFAULT: "12px",
+            md: "18px",
+            lg: "24px",
+            xl: "36px",
+            "2xl": "48px",
+            "3xl": "72px",
+            full: "9999px",
+          },
+          spacing: {
+            0: "0px",
+            1: "4px",
+            2: "8px",
+            3: "12px",
+            4: "16px",
+            5: "20px",
+            6: "24px",
+            7: "28px",
+            8: "32px",
+            9: "36px",
+            10: "40px",
+            11: "44px",
+            12: "48px",
+            14: "56px",
+            16: "64px",
+            20: "80px",
+            24: "96px",
+            28: "112px",
+            32: "128px",
+            36: "144px",
+            40: "160px",
+            44: "176px",
+            48: "192px",
+            52: "208px",
+            56: "224px",
+            60: "240px",
+            64: "256px",
+            72: "288px",
+            80: "320px",
+            96: "384px",
+            px: "1px",
+            0.5: "2px",
+            1.5: "6px",
+            2.5: "10px",
+            3.5: "14px",
+          },
+        },
+        plugins: [],
+      };
+    </script>
+    <style>
+      body {
+        background-color: #242424;
+      }
+    </style>
+
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Текущая дата
+        let currentDate = new Date();
+        
+        // Элементы DOM
+        const currentMonthText = document.getElementById('current-month-text');
+        const prevMonthBtn = document.getElementById('prev-month-btn');
+        const nextMonthBtn = document.getElementById('next-month-btn');
+        const calendarGrid = document.getElementById('calendar-grid');
+        
+        // Названия месяцев на русском
+        const monthNames = [
+            'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+            'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+        ];
+        
+        // Создаем элемент контекстного меню
+        const contextMenu = document.createElement('div');
+        contextMenu.id = 'context-menu';
+        contextMenu.className = 'hidden absolute z-50 bg-neutral-800 border border-neutral-700 rounded-md shadow-lg py-1 w-32';
+        contextMenu.innerHTML = `
+            <div class="px-4 py-2 text-sm text-white rounded-lg hover:bg-neutral-700 cursor-pointer" id="delete-task">Удалить</div>
+        `;
+        document.body.appendChild(contextMenu);
+        
+        // Текущая выбранная задача
+        let selectedTask = null;
+        
+        // Обработчик клика вне контекстного меню
+        document.addEventListener('click', function() {
+            contextMenu.classList.add('hidden');
+        });
+        
+        // Обработчик нажатия правой кнопки мыши на задачу
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.closest('.task-item')) {
+                e.preventDefault();
+                selectedTask = e.target.closest('.task-item');
+                
+                // Позиционируем меню рядом с курсором
+                contextMenu.style.left = `${e.pageX}px`;
+                contextMenu.style.top = `${e.pageY}px`;
+                contextMenu.classList.remove('hidden');
+            }
+        });
+        
+        // Обработчик клика по пункту "Удалить"
+        document.getElementById('delete-task').addEventListener('click', function() {
+            if (selectedTask) {
+                const taskTitle = selectedTask.querySelector('.task-title').textContent;
+                const taskDateStr = selectedTask.dataset.date;
+                const taskTimeStr = selectedTask.dataset.time;
+                
+                // Удаляем задачу из локального хранилища
+                deleteTaskFromStorage(taskTitle, taskDateStr, taskTimeStr);
+                
+                // Удаляем элемент из DOM
+                selectedTask.remove();
+                selectedTask = null;
+                contextMenu.classList.add('hidden');
+                
+                // Перерисовываем календарь
+                renderCalendar();
+            }
+        });
+        
+        // Функция для удаления задачи из localStorage
+        function deleteTaskFromStorage(title, dateStr, timeStr) {
+            const allTasks = JSON.parse(localStorage.getItem('allTasks')) || {};
+            
+            for (const projectId in allTasks) {
+                const projectTasks = allTasks[projectId];
+                
+                for (let i = 0; i < projectTasks.length; i++) {
+                    const task = projectTasks[i];
+                    if (task.title === title && 
+                        task.endDate.includes(dateStr) && 
+                        task.endDate.includes(timeStr)) {
+                        
+                        projectTasks.splice(i, 1);
+                        localStorage.setItem('allTasks', JSON.stringify(allTasks));
+                        return;
+                    }
+                }
+            }
+        }
+        
+        // Инициализация календаря
+        function initCalendar() {
+            updateMonthDisplay();
+            renderCalendar();
+        }
+        
+        // Обновление отображения месяца и года
+        function updateMonthDisplay() {
+            currentMonthText.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+        }
+        
+        // Функция для парсинга даты из формата "13 июн. 2025 г."
+        function parseRussianDate(dateStr) {
+            const months = {
+                'янв': 0, 'фев': 1, 'мар': 2, 'апр': 3,
+                'май': 4, 'июн': 5, 'июл': 6, 'авг': 7,
+                'сен': 8, 'окт': 9, 'ноя': 10, 'дек': 11
+            };
+            
+            const match = dateStr.match(/(\d{1,2})\s+([а-я]+)\.?\s+(\d{4})\s+г\./);
+            if (match) {
+                const day = parseInt(match[1]);
+                const month = months[match[2].toLowerCase().substring(0, 3)];
+                const year = parseInt(match[3]);
+                return new Date(year, month, day);
+            }
+            return null;
+        }
+        
+        // Функция для парсинга даты и времени из формата "15 июн. 2025 г., 12:13"
+        function parseRussianDateTime(dateTimeStr) {
+            const months = {
+                'янв': 0, 'фев': 1, 'мар': 2, 'апр': 3,
+                'май': 4, 'июн': 5, 'июл': 6, 'авг': 7,
+                'сен': 8, 'окт': 9, 'ноя': 10, 'дек': 11
+            };
+            
+            const match = dateTimeStr.match(/(\d{1,2})\s+([а-я]+)\.?\s+(\d{4})\s+г\.,\s+(\d{1,2}):(\d{2})/);
+            if (match) {
+                const day = parseInt(match[1]);
+                const month = months[match[2].toLowerCase().substring(0, 3)];
+                const year = parseInt(match[3]);
+                const hours = parseInt(match[4]);
+                const minutes = parseInt(match[5]);
+                return new Date(year, month, day, hours, minutes);
+            }
+            return null;
+        }
+        
+        // Функция для получения задач на определенную дату
+        function getTasksForDate(date) {
+            const allTasks = JSON.parse(localStorage.getItem('allTasks')) || {};
+            const result = [];
+            
+            // Перебираем все проекты и их задачи
+            for (const projectId in allTasks) {
+                const projectTasks = allTasks[projectId];
+                
+                projectTasks.forEach(task => {
+                    // Парсим дату окончания задачи
+                    const endDate = parseRussianDateTime(task.endDate);
+                    
+                    if (endDate && 
+                        endDate.getDate() === date.getDate() && 
+                        endDate.getMonth() === date.getMonth() && 
+                        endDate.getFullYear() === date.getFullYear()) {
+                        
+                        result.push({
+                            title: task.title,
+                            description: task.description,
+                            projectName: task.projectName || 'Без проекта',
+                            endDate: task.endDate
+                        });
+                    }
+                });
+            }
+            
+            return result;
+        }
+        
+        // Рендер календаря
+        function renderCalendar() {
+            calendarGrid.innerHTML = '';
+            
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            // Первый день месяца
+            const firstDay = new Date(year, month, 1);
+            // Последний день месяца
+            const lastDay = new Date(year, month + 1, 0);
+            // День недели первого дня месяца (0 - воскресенье, 1 - понедельник и т.д.)
+            const firstDayOfWeek = firstDay.getDay();
+            // Количество дней в месяце
+            const daysInMonth = lastDay.getDate();
+            
+            // Дни предыдущего месяца
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            
+            // Дни следующего месяца
+            let nextMonthDays = 1;
+            
+            // Всего ячеек в календаре (6 строк по 7 дней)
+            const totalCells = 42;
+            
+            // Создаем ячейки календаря
+            for (let i = 0; i < totalCells; i++) {
+                let day;
+                let isCurrentMonth = false;
+                let cellDate;
+                
+                // Дни предыдущего месяца
+                if (i < firstDayOfWeek) {
+                    day = prevMonthLastDay - (firstDayOfWeek - 1 - i);
+                    isCurrentMonth = false;
+                    cellDate = new Date(year, month - 1, day);
+                } 
+                // Дни текущего месяца
+                else if (i < firstDayOfWeek + daysInMonth) {
+                    day = i - firstDayOfWeek + 1;
+                    isCurrentMonth = true;
+                    cellDate = new Date(year, month, day);
+                } 
+                // Дни следующего месяца
+                else {
+                    day = nextMonthDays++;
+                    isCurrentMonth = false;
+                    cellDate = new Date(year, month + 1, day);
+                }
+                
+                // Получаем задачи для этой даты
+                const tasksForDate = getTasksForDate(cellDate);
+                
+                // Создаем элемент дня
+                const dayElement = document.createElement('div');
+                dayElement.className = `p-3.5 ${isCurrentMonth ? '' : 'bg-neutral-950'} xl:aspect-auto lg:h-28 border-b border-r border-neutral-700 flex justify-between flex-col max-lg:items-center min-h-[70px] transition-all duration-300 hover:bg-neutral-800`;
+                
+                // Добавляем номер дня
+                const dayNumber = document.createElement('span');
+                dayNumber.className = `text-xs font-semibold ${isCurrentMonth ? 'text-green-600' : 'text-white'} flex items-center justify-center w-7 h-7 rounded-full`;
+                dayNumber.textContent = day;
+                
+                dayElement.appendChild(dayNumber);
+                
+                // Добавляем задачи в ячейку календаря
+                if (tasksForDate.length > 0) {
+                    const tasksContainer = document.createElement('div');
+                    tasksContainer.className = 'mt-0 mx-2 space-y-1 overflow-hidden';
+                    
+                    tasksForDate.forEach(task => {
+                        const taskElement = document.createElement('div');
+                        taskElement.className = 'text-xs text-white truncate task-item cursor-pointer';
+                        
+                        // Добавляем данные о дате и времени для удаления
+                        const dateMatch = task.endDate.match(/(\d{1,2}\s+[а-я]+\.?\s+\d{4}\s+г\.)/);
+                        const timeMatch = task.endDate.match(/, (\d{1,2}:\d{2})/);
+                        
+                        if (dateMatch && timeMatch) {
+                            taskElement.dataset.date = dateMatch[1];
+                            taskElement.dataset.time = timeMatch[1];
+                        }
+                        
+                        const projectName = document.createElement('div');
+                        projectName.className = 'font-bold text-green-400';
+                        projectName.textContent = task.projectName || 'Без проекта';
+                        
+                        const taskTitle = document.createElement('div');
+                        taskTitle.className = 'task-title text-gray-300';
+                        taskTitle.textContent = task.title || 'Без названия';
+                        
+                        const taskTime = document.createElement('div');
+                        taskTime.className = 'text-gray-500 text-xs';
+                        
+                        if (timeMatch) {
+                            taskTime.textContent = `До ${timeMatch[1]}`;
+                        }
+                        
+                        taskElement.appendChild(projectName);
+                        taskElement.appendChild(taskTitle);
+                        taskElement.appendChild(taskTime);
+                        tasksContainer.appendChild(taskElement);
+                    });
+                    
+                    dayElement.appendChild(tasksContainer);
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+        
+        // Переключение на предыдущий месяц
+        prevMonthBtn.addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            updateMonthDisplay();
+            renderCalendar();
+        });
+        
+        // Переключение на следующий месяц
+        nextMonthBtn.addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            updateMonthDisplay();
+            renderCalendar();
+        });
+        
+        // Инициализируем календарь
+        initCalendar();
+    });
+    </script>
+
+    <!-- Добавляем стили для контекстного меню -->
+    
+
+  </body>
+</html>
